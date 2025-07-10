@@ -1,0 +1,137 @@
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+
+/* Modern Skeleton Loading Animation */
+@keyframes shimmer {
+  0% { background-position: -468px 0; }
+  100% { background-position: 468px 0; }
+}
+
+.animate-pulse {
+  background: #f5f5f5;
+  background: linear-gradient(to right, #f5f5f5 8%, #e0e0e0 18%, #f5f5f5 33%);
+  background-size: 800px 104px;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+/* Skeleton List Grid */
+.product-skeleton-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  @media (min-width: $sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  @media (min-width: $md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: $lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (min-width: $xl) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Card Skeleton Structure */
+ui-card {
+  background-color: white;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .card-actions {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+
+    .card-wishlist {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+  }
+
+  .card-image {
+    .product-skeleton-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background-color: #f9f9f9;
+    }
+  }
+
+  .card-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .card-header {
+      .card-title-wrapper {
+        .skeleton-title {
+          height: 1.25rem;
+          width: 80%;
+          margin-bottom: 0.75rem;
+        }
+      }
+
+      .card-subtitle {
+        .skeleton-subtitle {
+          height: 0.875rem;
+          width: 60%;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .skeleton-price {
+        height: 1.5rem;
+        width: 4rem;
+      }
+
+      .skeleton-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: $md) {
+  ui-card {
+    .card-content {
+      padding: 1rem;
+
+      .card-footer {
+        .skeleton-button {
+          width: 36px;
+          height: 36px;
+        }
+      }
+    }
+  }
+}

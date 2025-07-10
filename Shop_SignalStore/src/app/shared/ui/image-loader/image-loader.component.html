@@ -1,0 +1,23 @@
+<div class="image-wrapper">
+  @if (!hasError) {
+    <img
+      [src]="src"
+      [alt]="alt"
+      (load)="onLoad()"
+      (error)="onError()"
+      class="loaded-image"
+    />
+  }
+
+  @if (isLoading && !hasError) {
+    <div class="placeholder shimmer">
+      Loading image...
+    </div>
+  }
+
+  @if (hasError) {
+    <div class="error">
+      Failed to load.
+    </div>
+  }
+</div>

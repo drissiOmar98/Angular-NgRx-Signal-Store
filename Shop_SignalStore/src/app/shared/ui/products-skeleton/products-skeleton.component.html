@@ -1,0 +1,32 @@
+<section class="product-skeleton-list">
+  @for (item of length | range; track item) {
+    <ui-card variant="grid">
+      <!-- Skeleton for action buttons -->
+      <div class="card-actions">
+        <div class="card-wishlist animate-pulse"></div>
+      </div>
+
+      <!-- Skeleton for image -->
+      <div class="card-image">
+        <div class="product-skeleton-img animate-pulse"></div>
+      </div>
+
+      <!-- Skeleton for content -->
+      <div class="card-content">
+        <div class="card-header">
+          <div class="card-title-wrapper">
+            <div class="skeleton-title animate-pulse"></div>
+          </div>
+          <div class="card-subtitle">
+            <div class="skeleton-subtitle animate-pulse"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="skeleton-price animate-pulse"></div>
+          <div class="skeleton-button animate-pulse"></div>
+        </div>
+      </div>
+    </ui-card>
+  }
+</section>
