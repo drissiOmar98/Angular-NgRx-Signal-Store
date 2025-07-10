@@ -1,0 +1,23 @@
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px; // spacing between stars
+
+  fa-icon {
+    font-size: 1rem; // size of each star
+    transition: transform 0.2s ease;
+    cursor: default;
+
+    &.text-warning {
+      color: #ffc107; // gold (bootstrap warning color)
+    }
+
+    &.text-muted {
+      color: #ccc; // light gray for empty stars
+    }
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}

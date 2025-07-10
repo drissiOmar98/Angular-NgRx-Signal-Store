@@ -1,0 +1,16 @@
+<div class="rating">
+  <!-- Full stars -->
+  @for (_ of createArray(fullStars); track $index) {
+    <fa-icon [icon]="['fas', 'star']" class="text-warning"></fa-icon>
+  }
+
+  <!-- Half star -->
+  @if (hasHalfStar) {
+    <fa-icon [icon]="['fas', 'star-half-stroke']" class="text-warning"></fa-icon>
+  }
+
+  <!-- Empty stars -->
+  @for (_ of createArray(emptyStars); track $index) {
+    <fa-icon [icon]="['far', 'star']" class="text-muted"></fa-icon>
+  }
+</div>
