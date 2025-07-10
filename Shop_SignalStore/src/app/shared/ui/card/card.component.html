@@ -1,0 +1,38 @@
+<div class="card" [class]="'card--' + variant">
+  <!-- Top action buttons -->
+  <div class="card-actions">
+    <ng-content select=".card-wishlist"></ng-content>
+    <ng-content select=".card-remove"></ng-content>
+  </div>
+
+  <!-- Image section -->
+  <div class="card-media">
+    <ng-content select=".card-image"></ng-content>
+  </div>
+
+  <!-- Content section -->
+  <div class="card-content">
+    <div class="card-header">
+      <div class="card-title-wrapper">
+        <ng-content select=".card-title"></ng-content>
+      </div>
+      <div class="card-subtitle">
+        <ng-content select=".card-subtitle"></ng-content>
+      </div>
+      <div class="card-description">
+        <ng-content select=".card-description"></ng-content>
+      </div>
+      <div class="card-rating">
+        <ng-content select=".card-rating"></ng-content>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <ng-content select=".card-body"></ng-content>
+    </div>
+
+    <div class="card-footer">
+      <ng-content select=".card-footer"></ng-content>
+    </div>
+  </div>
+</div>
