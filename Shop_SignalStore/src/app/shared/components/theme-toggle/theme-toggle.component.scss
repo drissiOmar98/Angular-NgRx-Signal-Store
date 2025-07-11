@@ -1,0 +1,30 @@
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--transition-slow) var(--ease-out);
+    border: 1px solid var(--border-light);    
+
+    &:hover {
+        background-color: var(--neutral-100);
+        color: var(--primary-600);
+        border-color: var(--border-medium);
+    }
+
+    .dark-theme & {
+        &:hover {
+            background-color: var(--bg-tertiary);
+        }
+    }
+
+    i {
+        font-size: var(--font-size-lg);
+    }
+}
