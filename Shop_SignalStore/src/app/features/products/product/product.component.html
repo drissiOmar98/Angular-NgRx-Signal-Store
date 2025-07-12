@@ -1,0 +1,51 @@
+<ui-card  variant="grid">
+
+  <!-- Wishlist button -->
+  <button class="card-wishlist" (click)="onToggleFavorite()"  aria-label="Add to wishlist">
+    <fa-icon
+      [icon]="isFavorite ? ['fas', 'heart'] : ['far', 'heart']"
+      [class.favorite]="isFavorite"
+    ></fa-icon>
+  </button>
+
+  <!-- Product image -->
+  <div class="card-image">
+    @if (data?.image) {
+      <app-image-loader
+        class="product-img"
+        [src]="data?.image ?? ''"
+        [alt]="data?.title ?? 'Product image'" />
+    }
+  </div>
+
+
+  <!-- Product info -->
+  <div class="card-title">{{ data?.title }}</div>
+  <div class="card-subtitle">{{ data?.category }}</div>
+
+  <!-- Rating with count -->
+  <div class="card-rating">
+
+      <app-rating [rating]="data?.rating?.rate || 0"></app-rating>
+
+    <span class="rating-value">{{ data?.rating?.rate | number:'1.1-1' }}</span>
+    <span class="rating-count">({{ data?.rating?.count }})</span>
+  </div>
+
+  <!-- Footer with price and add to cart -->
+  <div class="card-footer">
+    <div class="price-container">
+      <span class="current-price">{{ data?.price | currency }}</span>
+    </div>
+    <button
+      type="button"
+      class="add-to-cart"
+      (click)="addToCart(data!)"
+      aria-label="Add to cart"
+      [disabled]="!data"
+    >
+      <lucide-angular [img]="Plus" [size]="18" class="my-icon" />
+    </button>
+  </div>
+</ui-card>
+
