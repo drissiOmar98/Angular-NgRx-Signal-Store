@@ -1,0 +1,35 @@
+$xs: 375px;
+$sm: 640px;
+$md: 768px;
+$xl: 1280px;
+
+.product-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media screen and (min-width: $xs) {
+  .product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: $sm) {
+  .product-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: $md) {
+  .product-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: $xl) {
+  .product-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+

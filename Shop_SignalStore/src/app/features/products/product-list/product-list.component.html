@@ -1,0 +1,8 @@
+<section class="product-list">
+  @for (product of data; track product.id){
+    <app-product [data]="product"
+                 [isFavorite]="isFavorite(product.id)"
+                 (toggleFavorite)="toggleFavorite.emit($event)"
+    />
+  }
+</section>

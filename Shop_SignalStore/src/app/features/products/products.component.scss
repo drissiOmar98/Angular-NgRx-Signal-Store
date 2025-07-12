@@ -1,0 +1,109 @@
+.products {
+  padding-top: 6rem;
+  padding-bottom: 9rem;
+
+  section {
+    h1 {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.cart-toast {
+  position: fixed;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff182f;
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  padding: 0.5rem;
+  border-radius: .5rem;
+  gap: .5rem;
+  align-items: center;
+  width: 100%;
+  max-width: max-content;
+  transition: .3s;
+
+  a {
+    text-decoration: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: .3rem .4rem;
+    border-radius: .4rem;
+    transition: .1s;
+    font-size: 13px;
+    margin-left: auto;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+  }
+
+  .my-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &-show {
+    bottom: 1rem;
+  }
+}
+
+
+/* Update the favorite toast to match cart toast */
+.favorite-toast {
+  position: fixed;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  padding: 0.5rem;
+  border-radius: .5rem;
+  gap: .5rem;
+  align-items: center;
+  width: 100%;
+  max-width: max-content;
+  transition: .3s;
+  z-index: 1000;
+
+  /* Keep the heart icon red */
+  .my-icon {
+    color: #ef4444;
+    width: 20px;
+    height: 20px;
+  }
+
+  p {
+    margin: 0;
+    color: #fff;
+  }
+
+  a {
+    text-decoration: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: .3rem .4rem;
+    border-radius: .4rem;
+    transition: .1s;
+    font-size: 13px;
+    margin-left: auto;
+
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+
+  &-show {
+    bottom: 1rem;
+  }
+}
+
+

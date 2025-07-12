@@ -1,0 +1,33 @@
+<main class="container products">
+  <section>
+    <h1>Products</h1>
+    @if (productStore.loading()) {
+      <app-products-skeleton [length]="10" />
+    } @else {
+      <app-product-list
+        [data]="productStore.products()"
+        (toggleFavorite)="toggleFavorite($event)"
+        [isFavorite]="isFavorite"
+      />
+    }
+  </section>
+
+  <!-- Cart Toast -->
+  <div class="cart-toast" [class.cart-toast-show]="cartToastShow()">
+    <lucide-angular [img]="ShoppingBag" [size]="20" class="my-icon" />
+    <p>Successfully added to Cart.</p>
+    <a routerLink="/cart">View cart</a>
+  </div>
+
+
+  <!-- Favorite Toast -->
+  <div class="favorite-toast" [class.favorite-toast-show]="favoriteToastShow()">
+    <lucide-angular
+      [img]="Heart"
+      [size]="20"
+      class="my-icon"
+    />
+    <p>{{ favoriteToastMessage() }}</p>
+    <a routerLink="/favorites">View favorites</a>
+  </div>
+</main>
