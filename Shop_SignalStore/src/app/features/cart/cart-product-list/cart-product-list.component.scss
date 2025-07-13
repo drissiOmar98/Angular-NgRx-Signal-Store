@@ -1,0 +1,21 @@
+$sm: 640px;
+
+.cart-product-list {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.cart-fill-row {
+  .cart-product-list {
+    &>* {
+      grid-column: span 2 / span 2;
+    }
+  }
+}
+
+@media screen and (min-width: $sm) {
+  .cart-product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

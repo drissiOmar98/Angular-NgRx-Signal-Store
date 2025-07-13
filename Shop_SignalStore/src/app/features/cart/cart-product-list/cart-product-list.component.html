@@ -1,0 +1,5 @@
+<section class="cart-product-list">
+  @for (product of data; track product.id){
+    <app-cart-product [data]="product" />
+  }
+</section>

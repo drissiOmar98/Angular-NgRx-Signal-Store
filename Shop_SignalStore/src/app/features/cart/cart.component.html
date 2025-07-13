@@ -1,0 +1,39 @@
+<main class="container">
+  @if(cartStore.totalQuantities()){
+    <section>
+      <h1>Your Cart</h1>
+      <button type="button" (click)="resetCart()">Clear All ({{cartStore.totalQuantities()}})</button>
+    </section>
+    <div [class.cart-fill-row]="cartStore.uniqueItemsCount() === 1">
+      <app-cart-product-list [data]="cartStore.items()" />
+      <section>
+        <div>
+          <span>Subtotal</span>
+          <span>{{cartStore.totalAmount()| currency}}</span>
+        </div>
+        <div>
+          <span>Delivery Fee</span>
+          <span>Free</span>
+        </div>
+        <div class="cart-total">
+          <span>Total</span>
+          <span>{{cartStore.totalAmount()| currency}}</span>
+        </div>
+        <button type="button" (click)="checkout()" [disabled]="isLoading">
+          @if(isLoading){
+            Loading...
+          }@else {
+            Pay {{cartStore.totalAmount()| currency}}
+          }
+        </button>
+        <!-- <button type="button" (click)="checkout()">Pay {{data().totalAmount| currency}}</button> -->
+      </section>
+    </div>
+  } @else {
+    <div class="cart-empty">
+      <p>Your shopping cart is empty.</p>
+      <a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+         ariaCurrentWhenActive="page" >Shop</a>
+    </div>
+  }
+</main>
