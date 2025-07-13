@@ -1,0 +1,62 @@
+<!-- Toast -->
+<div class="dynamic-toast"
+     [class]="toastType() + '-toast'"
+     [class.toast-show]="showToast()">
+  <fa-icon
+    [icon]="toastType() === 'cart' ? ['fas', 'shopping-cart'] : ['fas', 'heart']"
+    class="my-icon">
+  </fa-icon>
+  <p>
+    {{ toastType() === 'cart' ? 'Successfully added to Cart' : 'Removed from favorites' }}
+  </p>
+  <a [routerLink]="toastType() === 'cart' ? '/cart' : '/favorites'">
+    View {{ toastType() === 'cart' ? 'cart' : 'favorites' }}
+  </a>
+</div>
+
+<!-- Product Card -->
+<ui-card variant="grid">
+  <!-- Wishlist button -->
+  <button class="card-wishlist"
+          (click)="removeFromFavorites(data!.id)"
+          aria-label="Remove from favorites">
+    <fa-icon [icon]="['fas', 'heart']" class="favorite"></fa-icon>
+  </button>
+
+  <!-- Product image -->
+  <div class="card-image">
+    @if (data?.image) {
+      <app-image-loader
+        class="favorite-product-img"
+        [src]="data?.image ?? ''"
+        [alt]="data?.title ?? ''" />
+    }
+  </div>
+
+
+  <!-- Product info -->
+  <div class="card-title">{{ data?.title }}</div>
+  <div class="card-subtitle">{{ data?.category }}</div>
+
+  <!-- Rating with count -->
+  <div class="card-rating">
+    <app-rating [rating]="data?.rating?.rate || 0"></app-rating>
+    <span class="rating-value">{{ data?.rating?.rate | number:'1.1-1' }}</span>
+    <span class="rating-count">({{ data?.rating?.count }})</span>
+  </div>
+
+  <!-- Footer with price and add to cart -->
+  <div class="card-footer">
+    <div class="price-container">
+      <span class="current-price">{{ data?.price | currency }}</span>
+    </div>
+    <button
+      type="button"
+      class="add-to-cart"
+      (click)="addToCart(data!)"
+      aria-label="Add to cart"
+      [disabled]="!data">
+      <fa-icon [icon]="['fas', 'shopping-cart']"></fa-icon>
+    </button>
+  </div>
+</ui-card>
