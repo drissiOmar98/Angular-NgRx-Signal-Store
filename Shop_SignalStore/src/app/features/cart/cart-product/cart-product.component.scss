@@ -1,0 +1,208 @@
+
+.card--cart {
+  position: relative;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  border: 1px solid #efefef;
+  padding: 1.25rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  &:hover {
+    border-color: #e0e0e0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+
+    .card-remove {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+}
+
+// Use ::ng-deep to pierce encapsulation
+::ng-deep .card--cart {
+  .card-media {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    background: #f9f9f9;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cart-product-img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      padding: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover .cart-product-img {
+      transform: scale(1.05);
+    }
+  }
+
+  .card-content {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-subtitle {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between; // This creates maximum space between items
+    align-items: center;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f5f5f5;
+
+    .price-container {
+      flex: 1; // Allow price container to take available space
+      min-width: 0; // Prevent overflow
+
+      .price {
+        font-weight: 700;
+        font-size: 1.125rem;
+        color: #222;
+        white-space: nowrap; // Prevent price from wrapping
+        overflow: hidden;
+        text-overflow: ellipsis; // Add ellipsis if price is too long
+      }
+    }
+
+    .quantity-controls {
+      margin-left: 10rem; // Add space between price and controls
+      flex-shrink: 0; // Prevent controls from shrinking
+      // Keep your existing quantity controls styles
+    }
+  }
+
+  //.card-wishlist {
+  //  width: 32px;
+  //  height: 32px;
+  //  display: flex;
+  //  align-items: center;
+  //  justify-content: center;
+  //  background: white;
+  //  border: none;
+  //  border-radius: 50%;
+  //  cursor: pointer;
+  //  transition: all 0.2s ease;
+  //  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  //  color: #666;
+  //  position: absolute;
+  //  top: 1rem;
+  //  right: 1rem;
+  //  z-index: 2;
+  //
+  //  &:hover {
+  //    transform: scale(1.1);
+  //    color: #ff4444;
+  //  }
+  //
+  //  &:active {
+  //    transform: scale(0.95);
+  //  }
+  //}
+
+  .card-remove {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #ff4444;
+    opacity: 1;
+    transform: translate(10px, 10px);
+    position: absolute;
+    top: 1rem; // Position below wishlist button
+    right: 1rem;
+    z-index: 2;
+
+    &:hover {
+      background: #ff4444;
+      color: white;
+      transform: translate(0, 0) scale(1.1);
+    }
+
+    &:active {
+      transform: translate(0, 0) scale(0.95);
+    }
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 0.4rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+
+    button {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #333;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+      &:hover {
+        background-color: #f0f0f0;
+        border-color: #d0d0d0;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0) scale(0.95);
+      }
+    }
+
+    .quantity {
+      min-width: 28px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+      color: #333;
+    }
+  }
+}

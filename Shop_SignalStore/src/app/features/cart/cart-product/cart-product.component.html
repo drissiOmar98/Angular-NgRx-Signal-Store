@@ -1,0 +1,36 @@
+<ui-card variant="cart">
+  <!-- Wishlist button -->
+<!--  <button class="card-wishlist" (click)="toggleWishlist()" aria-label="Add to wishlist">-->
+<!--    <lucide-angular [img]="isInWishlist ? Heart : Heart" [size]="20" />-->
+<!--  </button>-->
+
+  <!-- Remove button -->
+  <button class="card-remove" (click)="remove(data!.id)" aria-label="Remove item">
+    <lucide-angular [img]="Trash2" [size]="16" />
+  </button>
+
+  <!-- Product image -->
+  <div class="card-image">
+    <app-image-loader class="cart-product-img" [src]="data?.image ?? ''" [alt]="data?.title ?? ''" />
+  </div>
+
+  <!-- Product info -->
+  <div class="card-title">{{ data?.title }}</div>
+  <div class="card-subtitle">{{ data?.category }}</div>
+
+  <!-- Footer with price and quantity controls -->
+  <div class="card-footer">
+    <div class="price-container">
+      <strong class="price">{{ data?.price | currency }}</strong>
+    </div>
+    <div class="quantity-controls">
+      <button type="button" (click)="removeCartItem(data!.id)" aria-label="Decrease quantity">
+        <lucide-angular [img]="Minus" [size]="16" />
+      </button>
+      <span class="quantity">{{ data?.quantity }}</span>
+      <button type="button" (click)="addToCart(data!)" aria-label="Increase quantity">
+        <lucide-angular [img]="Plus" [size]="16" />
+      </button>
+    </div>
+  </div>
+</ui-card>
