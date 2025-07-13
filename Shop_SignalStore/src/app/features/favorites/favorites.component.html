@@ -1,0 +1,16 @@
+<main class="container favorites">
+  @if(favouriteStore.items().length){
+    <section>
+      <h1>Your Favorites</h1>
+      <button type="button" (click)="clearFavorites()">
+        Clear All ({{favouriteStore.items().length}})
+      </button>
+    </section>
+    <app-favorites-product-list [data]="favouriteStore.items()"/>
+  } @else {
+    <div class="favorites-empty">
+      <p>Your favorites list is empty.</p>
+      <a routerLink="/products" class="btn-shop">Browse Products</a>
+    </div>
+  }
+</main>

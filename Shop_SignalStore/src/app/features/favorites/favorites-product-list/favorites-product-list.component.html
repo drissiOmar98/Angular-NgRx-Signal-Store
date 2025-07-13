@@ -1,0 +1,5 @@
+<section class="favorites-product-list">
+  @for (product of data; track product.id) {
+    <app-favorites-product [data]="product" />
+  }
+</section>
