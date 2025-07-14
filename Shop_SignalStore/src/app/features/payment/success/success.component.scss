@@ -1,0 +1,124 @@
+.success-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  text-wrap: nowrap;
+  font-size: 14px;
+  align-items: center;
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: .3rem;
+    color: #000; // Default text color
+  }
+
+  span {
+    margin-bottom: 1rem;
+    color: #888888;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 0.1rem;
+    text-decoration: none;
+    background-color: #000;
+    font-size: 14px;
+    transition: .3s;
+    border-radius: .3rem;
+    padding: .4rem;
+    padding-left: 1rem;
+    color: #fff;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8)
+    }
+
+    .my-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #4bb71b;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #4bb71b;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    position: relative;
+    margin-bottom: 2rem;
+
+    .checkmark__circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+      stroke: #4bb71b;
+      fill: #fff;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+
+    .checkmark__check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+    }
+  }
+
+  // Dark mode styles
+  :host-context(.dark-theme) {
+    p {
+      color: #fff; // White text in dark mode
+    }
+
+    span {
+      color: #b0b0b0; // Lighter gray in dark mode
+    }
+
+    .checkmark .checkmark__circle {
+      fill: #222; // Darker background for the circle in dark mode
+    }
+
+    a {
+      background-color: #fff;
+      color: #000;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #4bb71b;
+  }
+}

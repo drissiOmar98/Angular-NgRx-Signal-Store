@@ -13,7 +13,6 @@ import {LucideAngularModule, Plus} from 'lucide-angular';
   imports: [
     ImageLoaderComponent,
     CardComponent,
-    NgIf,
     CurrencyPipe,
     DecimalPipe,
     RatingComponent,
