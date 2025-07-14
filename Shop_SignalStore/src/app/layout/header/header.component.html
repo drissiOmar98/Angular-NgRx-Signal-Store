@@ -1,0 +1,93 @@
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">
+        <a routerLink="/" class="logo-link">
+          <span class="logo-text">Shop<span class="accent">Nest</span></span>
+        </a>
+      </div>
+
+      <div class="nav-links">
+        <!-- Home Link with Icons -->
+        <a class="nav-link"
+           routerLink="/"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}"
+           ariaCurrentWhenActive="page">
+          <!-- PrimeIcons Version -->
+          <i class="pi pi-home"></i>
+          <!-- FontAwesome Alternative -->
+          <!-- <i class="fa-solid fa-house"></i> -->
+          <span>Home</span>
+        </a>
+
+        <!-- Shop Link with Icons -->
+        <a class="nav-link"
+           routerLink="/products"
+           routerLinkActive="active"
+           ariaCurrentWhenActive="page">
+          <!-- PrimeIcons Version -->
+          <i class="pi pi-shopping-bag"></i>
+          <!-- FontAwesome Alternative -->
+          <!-- <i class="fa-solid fa-bag-shopping"></i> -->
+          <span>Shop</span>
+        </a>
+
+        <!-- Features Link with Icons -->
+        <a class="nav-link"
+           href="#features">
+          <!-- PrimeIcons Version -->
+          <i class="pi pi-star"></i>
+          <!-- FontAwesome Alternative -->
+          <!-- <i class="fa-solid fa-star"></i> -->
+          <span>Features</span>
+        </a>
+
+        <!-- About Link with Icons -->
+        <a class="nav-link"
+           href="#about">
+          <!-- PrimeIcons Version -->
+          <i class="pi pi-info-circle"></i>
+          <!-- FontAwesome Alternative -->
+          <!-- <i class="fa-solid fa-circle-info"></i> -->
+          <span>About</span>
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <app-theme-toggle></app-theme-toggle>
+
+        <div class="icon-links">
+          <a class="icon-link favourite-link"
+             routerLink="/favorites"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             ariaCurrentWhenActive="page">
+            <!-- PrimeIcons Version -->
+            <i class="pi pi-heart"></i>
+            <!-- FontAwesome Alternative -->
+            <!-- <i class="fa-solid fa-heart"></i> -->
+            @if (favoriteStore.items().length > 0) {
+              <span class="badge">{{ favoriteStore.items().length }}</span>
+            }
+          </a>
+
+          <a class="icon-link cart-link"
+             routerLink="/cart"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             ariaCurrentWhenActive="page">
+            <!-- PrimeIcons Version -->
+            <i class="pi pi-shopping-cart"></i>
+            <!-- FontAwesome Alternative -->
+            <!-- <i class="fa-solid fa-cart-shopping"></i> -->
+            @if (cartStore.totalQuantities() > 0) {
+              <span class="badge">{{ cartStore.totalQuantities() }}</span>
+            }
+          </a>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+</header>

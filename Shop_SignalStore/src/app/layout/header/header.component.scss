@@ -1,0 +1,210 @@
+.header {
+  height: var(--header-height);
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--neutral-200);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  &.scrolled {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16px);
+    background-color: rgba(var(--bg-secondary-rgb), 0.9);
+  }
+}
+
+.nav {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+
+  .logo {
+    .logo-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-text {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+
+      .accent {
+        color: var(--primary-500);
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-2);
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-normal) var(--ease-in-out);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+
+      i {
+        font-size: var(--font-size-lg);
+      }
+
+      &:hover {
+        color: var(--primary-500);
+        background-color: var(--neutral-100);
+      }
+
+      &.active {
+        color: var(--primary-600);
+        font-weight: 600;
+
+        i {
+          color: var(--primary-600);
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 60%;
+          height: 2px;
+          background-color: var(--primary-500);
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+
+    .icon-links {
+      display: flex;
+      gap: var(--space-3);
+
+      .icon-link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: var(--text-secondary);
+        border-radius: 50%;
+        transition: all var(--transition-normal) var(--ease-in-out);
+
+        i {
+          font-size: var(--font-size-lg);
+        }
+
+        &:hover {
+          color: var(--primary-500);
+          background-color: var(--neutral-100);
+        }
+
+        &.active {
+          color: var(--primary-600);
+        }
+
+        .badge {
+          position: absolute;
+          top: -2px;
+          right: -2px;
+          font-size: 11px;
+          min-width: 18px;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 300px;
+          background-color: var(--primary-500);
+          color: white;
+          z-index: 1;
+        }
+      }
+    }
+
+    .github-link {
+      color: var(--text-secondary);
+      font-size: var(--font-size-xl);
+      transition: color var(--transition-normal) var(--ease-in-out);
+
+      &:hover {
+        color: var(--primary-500);
+      }
+    }
+  }
+
+  .mobile-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--primary-500);
+    }
+  }
+}
+
+// Mobile styles
+@media (max-width: 768px) {
+  .nav {
+    .nav-links {
+      display: none;
+    }
+
+    .nav-actions {
+      .icon-links {
+        gap: var(--space-2);
+      }
+    }
+
+    .mobile-menu-button {
+      display: block;
+    }
+  }
+
+  // Styles for when mobile menu is open
+  .mobile-menu-open {
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      background-color: var(--bg-secondary);
+      padding: var(--space-4);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      .nav-link {
+        padding: var(--space-3) var(--space-4);
+        justify-content: flex-start;
+
+        i {
+          width: 24px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
