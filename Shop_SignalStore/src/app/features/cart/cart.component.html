@@ -19,8 +19,8 @@
           <span>Total</span>
           <span>{{cartStore.totalAmount()| currency}}</span>
         </div>
-        <button type="button" (click)="checkout()" [disabled]="isLoading">
-          @if(isLoading){
+        <button type="button" (click)="checkout()" [disabled]="paymentService.isLoadingSig()">
+          @if(paymentService.isLoadingSig()){
             Loading...
           }@else {
             Pay {{cartStore.totalAmount()| currency}}
@@ -36,4 +36,17 @@
          ariaCurrentWhenActive="page" >Shop</a>
     </div>
   }
+
+  <!<!-- Payment Toast -->
+  <div class="payment-toast" [class.payment-toast-show]="paymentToastShow()">
+    <lucide-angular [img]="ShoppingBag" [size]="20" class="my-icon" />
+    @if(paymentService.isLoadingSig()) {
+      <p>Processing your payment...</p>
+    } @else {
+      <p>{{ paymentToastMessage() }}</p>
+    }
+  </div>
 </main>
+
+
+
