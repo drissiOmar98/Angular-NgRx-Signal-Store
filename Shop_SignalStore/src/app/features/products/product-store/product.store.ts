@@ -86,7 +86,22 @@ export const ProductStore = signalStore(
     clearCurrentProduct: () => patchState(store, { currentProduct: null }),
     clearError: () => patchState(store, { error: null }),
   })),
+  withComputed((store) => ({
+    // Add this computed signal
+    relatedProducts: computed(() => {
+      const currentProduct = store.currentProduct();
+      const products = store.products();
 
+      if (!currentProduct || products.length === 0) {
+        return [];
+      }
+
+      return products.filter(p =>
+        p.category === currentProduct.category &&
+        p.id !== currentProduct.id
+      ).slice(0, 4); // Get max 4 related products
+    })
+  })),
   withHooks((store) => ({
     onInit: () => {
       console.log('ProductStore initialized, loading products...');
