@@ -1,20 +1,22 @@
 import {Product} from '../../../shared/models/product.model';
-import {patchState, signalStore, withHooks, withMethods, withState} from '@ngrx/signals';
-import {inject} from '@angular/core';
+import {patchState, signalStore, withComputed, withHooks, withMethods, withState} from '@ngrx/signals';
+import {computed, inject} from '@angular/core';
 import {ProductService} from '../services/product.service';
 import {rxMethod} from '@ngrx/signals/rxjs-interop';
-import {pipe, switchMap, tap} from 'rxjs';
+import {map, of, pipe, switchMap, tap} from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 
 
 type ProductState = {
   products: Product[];
+  currentProduct: Product | null;
   error: string | null;
   loading: boolean;
 };
 
 const initialState: ProductState = {
   products: [],
+  currentProduct: null,
   error: null,
   loading: false
 };
@@ -46,10 +48,44 @@ export const ProductStore = signalStore(
         )
       )
     ),
+    loadProductById: rxMethod<number>(
+      pipe(
+        tap(() => patchState(store, { loading: true, error: null })),
+        switchMap((id) => {
+          // First try to find in existing products
+          const existingProduct = store.products().find(p => p.id === id);
+          if (existingProduct) {
+            return of(existingProduct);
+          }
+          // If not found, fetch from API (though fakestoreapi.com doesn't support single product)
+          return productService.getProducts().pipe(
+            map(products => products.find(p => p.id === id)))
+        }),
+        tapResponse({
+          next: (product) => {
+            if (product) {
+              patchState(store, { currentProduct: product, loading: false });
+            } else {
+              patchState(store, {
+                error: 'Product not found',
+                loading: false
+              });
+            }
+          },
+          error: (err) => {
+            console.error('Error loading product:', err);
+            patchState(store, {
+              error: err instanceof Error ? err.message : 'Failed to load product',
+              loading: false,
+            });
+          },
+        })
+      )
+    ),
     getProductById: (id: number) => store.products().find((p) => p.id === id),
+    clearCurrentProduct: () => patchState(store, { currentProduct: null }),
     clearError: () => patchState(store, { error: null }),
   })),
-
 
   withHooks((store) => ({
     onInit: () => {
