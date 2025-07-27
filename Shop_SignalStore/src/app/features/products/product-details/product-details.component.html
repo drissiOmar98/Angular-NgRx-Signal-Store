@@ -1,0 +1,80 @@
+@if (productStore.loading()) {
+  <div class="loading">Loading product details...</div>
+} @else if (productStore.error()) {
+  <div class="error">{{ productStore.error() }}</div>
+} @else if (productStore.currentProduct()) {
+  <ui-card variant="list">
+
+    <!-- Wishlist button -->
+    <button class="card-wishlist" (click)="toggleFavorite(productStore.currentProduct()!)" aria-label="Add to wishlist">
+      <fa-icon
+        [icon]="isFavorite(productStore.currentProduct()?.id!) ? ['fas', 'heart'] : ['far', 'heart']"
+        [class.favorite]="isFavorite(productStore.currentProduct()?.id!)"
+      ></fa-icon>
+    </button>
+
+    <!-- Product image -->
+    <div class="card-image">
+      @if (productStore.currentProduct()?.image) {
+        <app-image-loader
+          class="product-img"
+          [src]="productStore.currentProduct()?.image ?? ''"
+          [alt]="productStore.currentProduct()?.title ?? 'Product image'" />
+      }
+    </div>
+
+    <!-- Product info -->
+    <div class="card-title">{{ productStore.currentProduct()?.title }}</div>
+    <div class="card-subtitle">{{ productStore.currentProduct()?.category }}</div>
+
+    <!-- Rating with count -->
+    <div class="card-rating">
+      <app-rating [rating]="productStore.currentProduct()?.rating?.rate || 0"></app-rating>
+      <span class="rating-value">
+            {{ productStore.currentProduct()?.rating?.rate | number:'1.1-1' }}
+          </span>
+      <span class="rating-count">
+            ({{ productStore.currentProduct()?.rating?.count }} reviews)
+          </span>
+    </div>
+
+    <!-- Price -->
+    <div class="price">
+      {{ productStore.currentProduct()?.price | currency }}
+    </div>
+
+    <!-- Description -->
+    <div class="card-description">
+      <p>{{ productStore.currentProduct()?.description }}</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="card-footer">
+      <button
+        class="add-to-cart"
+        (click)="addToCart(productStore.currentProduct()!)"
+        aria-label="Add to cart"
+      >
+        <lucide-angular [img]="ShoppingBag" [size]="18" class="my-icon" />
+        Add to Cart
+      </button>
+
+    </div>
+
+
+  </ui-card>
+
+  <!-- Related Products Section -->
+  <section class="related-products">
+    <h2>Related Products</h2>
+    @if (productStore.relatedProducts().length > 0) {
+      <app-product-list
+        [data]="productStore.relatedProducts()"
+        [isFavorite]="isFavorite.bind(this)"
+        (toggleFavorite)="toggleFavorite($event)"
+      />
+    } @else {
+      <p>No related products found</p>
+    }
+  </section>
+}

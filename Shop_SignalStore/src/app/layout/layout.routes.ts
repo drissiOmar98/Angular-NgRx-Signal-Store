@@ -21,6 +21,11 @@ export const LAYOUT_ROUTES: Routes = [
         data: { animation: 'ProductsPage' }
       },
       {
+        path: 'products/:id',
+        loadComponent: () => import('../features/products/product-details/product-details.component')
+          .then(m => m.ProductDetailsComponent)
+      },
+      {
         path: 'cart',
         loadComponent: () => import('../features/cart/cart.component')
           .then(m => m.CartComponent),

@@ -7,6 +7,7 @@ import {RatingComponent} from '../../../shared/ui/rating/rating.component';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {CartStore} from '../../cart/store/cart.store';
 import {LucideAngularModule, Plus} from 'lucide-angular';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,8 @@ import {LucideAngularModule, Plus} from 'lucide-angular';
     DecimalPipe,
     RatingComponent,
     FaIconComponent,
-    LucideAngularModule
+    LucideAngularModule,
+    RouterLink
   ],
   templateUrl: './product.component.html',
   standalone: true,

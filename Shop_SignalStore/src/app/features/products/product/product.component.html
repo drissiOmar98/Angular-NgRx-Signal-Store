@@ -9,12 +9,13 @@
   </button>
 
   <!-- Product image -->
-  <div class="card-image">
+  <div class="card-image" [routerLink]="['/products', data?.id]">
     @if (data?.image) {
       <app-image-loader
         class="product-img"
         [src]="data?.image ?? ''"
-        [alt]="data?.title ?? 'Product image'" />
+        [alt]="data?.title ?? 'Product image'"
+      />
     }
   </div>
 
