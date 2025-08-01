@@ -71,7 +71,9 @@
       <app-product-list
         [data]="productStore.relatedProducts()"
         [isFavorite]="isFavorite.bind(this)"
+        [isInCart]="isInCart.bind(this)"
         (toggleFavorite)="toggleFavorite($event)"
+        (toggleCart)="toggleInCart($event)"
       />
     } @else {
       <p>No related products found</p>

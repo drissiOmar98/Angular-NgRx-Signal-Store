@@ -1,14 +1,9 @@
 import {Component, effect, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Product} from '../../shared/models/product.model';
-
-
-import {ProductService} from './services/product.service';
 import {ProductListComponent} from './product-list/product-list.component';
 import {ProductsSkeletonComponent} from '../../shared/ui/products-skeleton/products-skeleton.component';
-
-import {Subject, take, takeUntil} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
+import {Subject} from 'rxjs';
 import {ProductStore} from './product-store/product.store';
 import {Heart, LucideAngularModule, ShoppingBag} from 'lucide-angular';
 import {CartStore} from '../cart/store/cart.store';
@@ -26,7 +21,7 @@ import {FavoritesStore} from '../favorites/favorites-store/favorites.store';
   standalone: true,
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent implements OnInit,OnDestroy{
+export class ProductsComponent implements OnDestroy{
   // Stores
   productStore = inject(ProductStore);
   cartStore = inject(CartStore);
@@ -36,47 +31,13 @@ export class ProductsComponent implements OnInit,OnDestroy{
   readonly ShoppingBag = ShoppingBag;
   protected readonly Heart = Heart;
 
-
-
-
   favoriteToastMessage = signal<string>('');
+  cartToastMessage = signal<string>('');
   cartToastShow = signal<boolean>(false);
   favoriteToastShow = signal<boolean>(false);
   timer: ReturnType<typeof setTimeout> | null = null
   private destroy$ = new Subject<void>();
 
-
-  constructor() {
-    // Cart toast effect - improved version
-    effect((onCleanup) => {
-      const currentQuantity = this.cartStore.totalQuantities();
-
-      // Clear any existing timer
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = null;
-      }
-
-      // Only show if there are items
-      if (currentQuantity > 0) {
-        this.cartToastShow.set(true);
-
-        // Hide after 5 seconds
-        this.timer = setTimeout(() => {
-          this.cartToastShow.set(false);
-        }, 5000);
-
-        // Cleanup
-        onCleanup(() => {
-          if (this.timer) clearTimeout(this.timer);
-        });
-      }
-    });
-  }
-
-  ngOnInit() {
-
-  }
 
   toggleFavorite(product: Product) {
     if (this.favoriteStore.isFavorite()(product.id)) {
@@ -92,6 +53,23 @@ export class ProductsComponent implements OnInit,OnDestroy{
 
   isFavorite = (productId: number): boolean => {
     return this.favoriteStore.isFavorite()(productId);
+  };
+
+  toggleInCart(product: Product) {
+    if (this.isInCart(product.id)) {
+      this.cartStore.remove(product.id);
+      this.cartToastMessage.set(`Removed ${product.title} from cart`);
+    } else {
+      this.cartStore.addItem(product);
+      this.cartToastMessage.set(`Added ${product.title} to cart`);
+    }
+    this.cartToastShow.set(true);
+    setTimeout(() => this.cartToastShow.set(false), 3000);
+  }
+
+
+  isInCart = (productId: number): boolean => {
+    return this.cartStore.isInCart()(productId);
   };
 
 

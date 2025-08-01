@@ -7,7 +7,9 @@
       <app-product-list
         [data]="productStore.products()"
         (toggleFavorite)="toggleFavorite($event)"
+        (toggleCart)="toggleInCart($event)"
         [isFavorite]="isFavorite"
+        [isInCart]="isInCart"
       />
     }
   </section>
@@ -15,7 +17,7 @@
   <!-- Cart Toast -->
   <div class="cart-toast" [class.cart-toast-show]="cartToastShow()">
     <lucide-angular [img]="ShoppingBag" [size]="20" class="my-icon" />
-    <p>Successfully added to Cart.</p>
+    <p>{{ cartToastMessage() }}</p>
     <a routerLink="/cart">View cart</a>
   </div>
 

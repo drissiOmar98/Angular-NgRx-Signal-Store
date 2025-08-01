@@ -2,7 +2,9 @@
   @for (product of data; track product.id){
     <app-product [data]="product"
                  [isFavorite]="isFavorite(product.id)"
+                 [isInCart]=" isInCart(product.id)"
                  (toggleFavorite)="toggleFavorite.emit($event)"
+                 (toggleCart)="toggleCart.emit($event)"
     />
   }
 </section>

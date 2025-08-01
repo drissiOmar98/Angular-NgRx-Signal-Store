@@ -56,9 +56,22 @@ export class ProductDetailsComponent {
     }
   }
 
+  toggleInCart(product: Product) {
+    if (this.isInCart(product.id)) {
+      this.cartStore.remove(product.id);
+    } else {
+      this.cartStore.addItem(product);
+    }
+  }
+
   isFavorite(productId: number): boolean {
     return this.favoriteStore.isFavorite()(productId);
   }
+
+  isInCart = (productId: number): boolean => {
+    return this.cartStore.isInCart()(productId);
+  };
+
 
 
   protected readonly ShoppingBag = ShoppingBag;

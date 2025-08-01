@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output, Signal} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from '../../../shared/models/product.model';
 import {ProductComponent} from '../product/product.component';
+
 
 
 @Component({
@@ -16,7 +17,9 @@ export class ProductListComponent {
 
   @Input() data: Product[] = [];
   @Input() isFavorite!: (productId: number) => boolean;
+  @Input() isInCart!:(productId: number) => boolean;
   @Output() toggleFavorite = new EventEmitter<Product>();
+  @Output() toggleCart = new EventEmitter<Product>();
 
 
 

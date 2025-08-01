@@ -27,22 +27,22 @@ import {RouterLink} from '@angular/router';
 })
 export class ProductComponent {
 
-  cartStore = inject(CartStore);
-
   @Input() data: Product | null = null;
   @Input() isFavorite!: boolean;
+  @Input() isInCart!: boolean;
   @Output() toggleFavorite = new EventEmitter<Product>();
+  @Output() toggleCart = new EventEmitter<Product>();
 
   constructor() { }
-
-  addToCart(item: Product) {
-    if (!item) return;
-    this.cartStore.addItem(item);
-  }
 
   onToggleFavorite() {
     if (this.data) {
       this.toggleFavorite.emit(this.data);
+    }
+  }
+  onToggleCart() {
+    if (this.data) {
+      this.toggleCart.emit(this.data);
     }
   }
 
