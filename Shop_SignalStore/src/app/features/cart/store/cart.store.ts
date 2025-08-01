@@ -24,7 +24,9 @@ export const CartStore = signalStore(
   withComputed((store) => ({
     isCartEmpty: computed(() => store.items().length === 0),
     uniqueItemsCount: computed(() => store.items().length),
-    // Additional computed properties can be added here
+    isInCart: computed(() => {
+      return (productId: number) => store.items().some(item => item.id === productId);
+    }),
     hasItems: computed(() => store.items().length > 0),
     averageItemPrice: computed(() => {
       const items = store.items();
