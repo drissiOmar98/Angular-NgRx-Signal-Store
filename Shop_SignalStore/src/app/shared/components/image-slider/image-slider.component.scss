@@ -1,0 +1,78 @@
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slides-overflow {
+  overflow: hidden;
+  height: 100%;
+}
+
+.slides-container {
+  display: flex;
+  height: 100%;
+  transition: transform ease-out 0.3s;
+}
+
+.slide {
+  height: 100%;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 45px;
+  color: white;
+  z-index: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.arrow:hover {
+  opacity: 0.7;
+}
+
+.arrow.left {
+  left: 32px
+}
+
+.arrow.right {
+  right: 32px
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #aaa; /* inactive */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  transform: scale(1.3);
+  background-color: rgb(255, 24, 47);
+}
+
+.dot.active {
+  width: 14px;
+  height: 14px;
+  background-color: rgba(0, 0, 0, 0.9);      /* active dot */
+
+}
+
