@@ -1,6 +1,6 @@
-import {Component, computed, effect, input, signal, untracked} from '@angular/core';
+import {Component, computed, effect, Inject, input, PLATFORM_ID, signal, untracked} from '@angular/core';
 import {Slide} from '../../models/slide';
-import {NgStyle} from '@angular/common';
+import {isPlatformBrowser, NgStyle} from '@angular/common';
 
 
 /**
@@ -64,12 +64,19 @@ export class ImageSliderComponent {
    */
   timeoutId= signal<number | undefined>(undefined);
 
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
   /**
    * Effect for automatic sliding.
    * Runs on `currentIndex` change, clears previous timeout, and schedules the next slide.
    * Slide interval is set to 2000ms (2 seconds) by default.
    */
   timeoutEffect= effect(() =>{
+    if (!this.isBrowser) return; // ✅ Prevent window access on server
     const index = this.currentIndex();
     const prevId= untracked(()=> this.timeoutId());
     window.clearTimeout(prevId);
